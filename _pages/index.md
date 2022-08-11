@@ -15,6 +15,10 @@ layout: home
 
 <section class="usa-section grid-container usa-prose" markdown="1">
 
+  {% if site.temporary_alert %}
+    {% include alert.html content=site.temporary_alert %}
+  {% endif %}
+
 # Get started...
 
 - [Understand our flow]({{ site.baseurl }}/overview/).
@@ -23,6 +27,6 @@ layout: home
 - Configure your app. We have [implementation guides]({{ site.baseurl }}/oidc/) and example apps to get you up and running quickly.
 - [Register your app in the sandbox dashboard and start testing]({{ site.baseurl }}/testing/).
 - Let us know when you are ready to go live and our team will help you [promote the application to production]({% link _pages/production.md %}). We will check you against our production checklist to ensure your application is good to go to production from an administrative and technical standpoint.
-- Be sure to read the [FAQ]({{ site.baseurl }}/faq/) for answers to the most common questions.
+- Be sure to read the [FAQ]({{ site.baseurl }}/support/#frequently-asked-questions) for answers to the most common questions.
 
 </section>

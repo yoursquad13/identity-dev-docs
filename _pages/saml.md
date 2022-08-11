@@ -30,6 +30,8 @@ sidenav:
         href: "#remote-logout-request"
   - text: Example application
     href: "#example-application"
+saml_year: 2022
+saml_last_year: 2021
 ---
 
 <div class="usa-alert usa-alert--warning">
@@ -57,14 +59,14 @@ Here are values needed to configure your service provider (SP) to work with Logi
   This is the endpoint where authentication requests are sent to Login.gov (aka Single Sign-on Service). For example:
 
   ```xml
-  <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://idp.int.identitysandbox.gov/api/saml/auth2021" />
+  <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://idp.int.identitysandbox.gov/api/saml/auth{{ page.saml_year }}" />
   ```
 
 - **Logout service URL and Binding**
   The single logout service URL is used to contact the Single logout profile (aka Single Logout Service). For example:
 
   ```xml
-  <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://idp.int.identitysandbox.gov/api/saml/logout2021" />
+  <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://idp.int.identitysandbox.gov/api/saml/logout{{ page.saml_year }}" />
   ```
 
 - **x509 Public Certificate**
@@ -72,106 +74,141 @@ Here are values needed to configure your service provider (SP) to work with Logi
 
 ### Metadata
 
-Consistent with the [SAML metadata specification](https://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf), Login.gov's metadata for our **sandbox** environment is available at [https://idp.int.identitysandbox.gov/api/saml/metadata2021](https://idp.int.identitysandbox.gov/api/saml/metadata2021).
+Consistent with the [SAML metadata specification](https://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf), Login.gov's metadata for our **sandbox** environment is available at [https://idp.int.identitysandbox.gov/api/saml/metadata{{ page.saml_year }}](https://idp.int.identitysandbox.gov/api/saml/metadata{{ page.saml_year }}).
 
 ### Signing Certificates
 Below you can find the X509 certificates used by the Login.gov IdP to sign SAML requests. **Do not enter these certificates in the Dashboard when configuring an application for testing** - you can follow the instructions in our [testing article]({% link _pages/testing.md %}#creating-a-public-certificate) to generate a client certificate.
 
 <div class="usa-accordion--bordered">
-  <button class="usa-accordion__button" aria-controls="sandbox-cert-2021">
-  View 2021 <strong>sandbox</strong> certificate
+  <button class="usa-accordion__button" aria-controls="sandbox-cert-2022">
+  View 2022 <strong>sandbox</strong> certificate
   </button>
-  <div id="sandbox-cert-2021" class="usa-accordion__content" markdown="1">
+  <div id="sandbox-cert-2022" class="usa-accordion__content" markdown="1">
 ```
 -----BEGIN CERTIFICATE-----
-MIID7TCCAtWgAwIBAgIUCethW2gYqC2N96czVCEaAkR/AiAwDQYJKoZIhvcNAQEL
-BQAwgYUxCzAJBgNVBAYTAlVTMR0wGwYDVQQIDBREaXN0cmljdCBvZiBDb2x1bWJp
-YTETMBEGA1UEBwwKV2FzaGluZ3RvbjEMMAoGA1UECgwDR1NBMRIwEAYDVQQLDAlM
-b2dpbi5nb3YxIDAeBgNVBAMMF2ludC5pZGVudGl0eXNhbmRib3guZ292MB4XDTIx
-MDMwNTE5MDY1N1oXDTIyMDQwMTE5MDY1N1owgYUxCzAJBgNVBAYTAlVTMR0wGwYD
-VQQIDBREaXN0cmljdCBvZiBDb2x1bWJpYTETMBEGA1UEBwwKV2FzaGluZ3RvbjEM
-MAoGA1UECgwDR1NBMRIwEAYDVQQLDAlMb2dpbi5nb3YxIDAeBgNVBAMMF2ludC5p
-ZGVudGl0eXNhbmRib3guZ292MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
-AQEA0OBtVKWm8J0vWLskFkkP9cTl1ZsgjGJFX4fbyhS0n21Q/20kFB3DPkHzzXLI
-iSUW0HSq9myrBoGiY0AET4OTN9n36aJ1miOM68Fklh/AWvHint25BEfmVLvjpCJq
-VmBriQS/SbwjEt6l03G7ZNV9o2pbRAjMUixysf4camHmZ6yEVWpa1Nb9BqZwk+wS
-LIBmCb4hYgCplkxT+NuHz0E2PonPBjr5Kr3in4NE2/B3YZl3JjBOwvt98/3HfuAW
-QbhvsWiAQdv9lI9UvHkc6WBEK1LAtDDjGC9IN70sx5M3DyP53DWGVzT+LdIgYgqw
-2kNoYLJPbPxI5G/8trFfaSNOXQIDAQABo1MwUTAdBgNVHQ4EFgQUAWvGpLiM7ZjZ
-6FYnlt7WVjk4740wHwYDVR0jBBgwFoAUAWvGpLiM7ZjZ6FYnlt7WVjk4740wDwYD
-VR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAGqOmAv+dtTms3quEteMt
-PeosyvHG7reRPSpZo2Z/oB46VYkGFd5Xf3zV9QkilX9fefDJH78WIU61nPIh0YMM
-VtyjO9SVcTE+2hpyvOcAc5UEZyhu3mUX7EiAHIIk2zrEIYTxGqGy8VxFpceeL8r9
-UjTbkKMgeL6i/mfK32eDRzt7+YR40KrG3iO4D4fOA0Mz6LW3jvuwLkLya7asl19Q
-mA0BH+6s1JSzlhB+S71WmVbdHLqdp/DOIkVncFfXL5Cwz9Kv/gvpRUMbsawZ5ITo
-ZROskHZ2bcQ3XohBUce1G1cQQKuPOKqLbpV0UmJAFBkkmhPYCcKjHGjs2m8X08D6
-iw==
+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
+kDdZjuFEbWGdkg==
 -----END CERTIFICATE-----
 ```
   </div>
 </div>
 
 <div class="usa-accordion--bordered">
-  <button class="usa-accordion__button" aria-controls="staging-cert-2021">
-  View 2021 <strong>staging</strong> certificate
+  <button class="usa-accordion__button" aria-controls="staging-cert-2022">
+  View 2022 <strong>staging</strong> certificate
   </button>
-  <div id="staging-cert-2021" class="usa-accordion__content" markdown="1">
+  <div id="staging-cert-2022" class="usa-accordion__content" markdown="1">
 ```
 -----BEGIN CERTIFICATE-----
-MIID3zCCAsegAwIBAgIUbQ9+wSUJ9e1AneiLtRD7V/1mRJEwDQYJKoZIhvcNAQEL
-BQAwfzELMAkGA1UEBhMCVVMxHTAbBgNVBAgMFERpc3RyaWN0IG9mIENvbHVtYmlh
-MRMwEQYDVQQHDApXYXNoaW5ndG9uMQwwCgYDVQQKDANHU0ExEjAQBgNVBAsMCUxv
-Z2luLmdvdjEaMBgGA1UEAwwRc3RhZ2luZy5sb2dpbi5nb3YwHhcNMjEwMzA1MTkw
-NzQ3WhcNMjIwNDAxMTkwNzQ3WjB/MQswCQYDVQQGEwJVUzEdMBsGA1UECAwURGlz
-dHJpY3Qgb2YgQ29sdW1iaWExEzARBgNVBAcMCldhc2hpbmd0b24xDDAKBgNVBAoM
-A0dTQTESMBAGA1UECwwJTG9naW4uZ292MRowGAYDVQQDDBFzdGFnaW5nLmxvZ2lu
-LmdvdjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANUNfCMWGoT9v4N/
-7I8q/bILj7uPERI0ECBooaY7mCAQijbwEJd0EvGnKDSYumqX0TNlcOaMk7cw0t1P
-gBTRgpIcRkUxHrUqDrEz2HIfDT6FMQuLoaq48HwEzeYLN51V9y1F2zqDCuQ5tP4z
-Vu1IrMeUDVhIzqwhDXpPit847lqcJjGulq3sIqOCLzncl28J8FST8jhNEUZZq7Kz
-LXjbofAtTOuCTnHKFeOD2Z54ltti3kzknodO3EMzSybTW6ZVrqkTwylwuMTcLIFA
-+7MmrEtLZZA0+TMgeGzK2eHjDGyNVsLVsqNP4nWEzH+cYui2PkhPbF+H8FwzfNeT
-rfTttEcCAwEAAaNTMFEwHQYDVR0OBBYEFERlUaCo4VsdtmbGqkBBRxfOeFZkMB8G
-A1UdIwQYMBaAFERlUaCo4VsdtmbGqkBBRxfOeFZkMA8GA1UdEwEB/wQFMAMBAf8w
-DQYJKoZIhvcNAQELBQADggEBAJa2Pdn+gyMWiDOSp6D1IQPrHkIfkMxQNZ1VB/oe
-HXOWWiuxu1OFnG7Jn5MN+aQVWkUasBIfG8pMEsh0ymF7XvwvjMaflxSEb0ubgivg
-4+AUPwLKeTapr+aVozqxuRSjj7rJBKh6/u9Adip87rH92K/L/kBfky2gCJ6DAJYr
-nBO2k9yV7Wpil1OBK5DQ71Cvg1ZxQon1zvd7Iy0qUwbdXV48RPDk296+jGFYkxte
-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
+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
+Xz+PFdjoW75sWzD9
 -----END CERTIFICATE-----
 ```
   </div>
 </div>
 
 <div class="usa-accordion--bordered">
-  <button class="usa-accordion__button" aria-controls="prod-cert-2021">
-  View 2021 <strong>production</strong> certificate
+  <button class="usa-accordion__button" aria-controls="prod-cert-2022">
+  View 2022 <strong>production</strong> certificate
   </button>
-  <div id="prod-cert-2021" class="usa-accordion__content" markdown="1">
+  <div id="prod-cert-2022" class="usa-accordion__content" markdown="1">
 ```
 -----BEGIN CERTIFICATE-----
-MIIDzzCCAregAwIBAgIUZD8catEsxhppdBq7wJDo6qmr54kwDQYJKoZIhvcNAQEL
-BQAwdzELMAkGA1UEBhMCVVMxHTAbBgNVBAgMFERpc3RyaWN0IG9mIENvbHVtYmlh
-MRMwEQYDVQQHDApXYXNoaW5ndG9uMQwwCgYDVQQKDANHU0ExEjAQBgNVBAsMCUxv
-Z2luLmdvdjESMBAGA1UEAwwJbG9naW4uZ292MB4XDTIxMDMwNTE5MDc1OFoXDTIy
-MDQwMTE5MDc1OFowdzELMAkGA1UEBhMCVVMxHTAbBgNVBAgMFERpc3RyaWN0IG9m
-IENvbHVtYmlhMRMwEQYDVQQHDApXYXNoaW5ndG9uMQwwCgYDVQQKDANHU0ExEjAQ
-BgNVBAsMCUxvZ2luLmdvdjESMBAGA1UEAwwJbG9naW4uZ292MIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxOOpDwiXOunf2brWjkaTpAV+pg60T6c6Fsyt
-EebNrrUMFPxXIP6eDbhSCiiM83koLSJek4bStma4me6RM7RM0+qLq526e08DE0lu
-DM0u45YsROWDqiAHFxJxqYovqYQ9JnaxuXmVuCfgBJyLQA0RcbN1G+NhT7VpgMzw
-ouyXhZs5O98fIGMBm7HVckxsude75yOLYOOhiTL2RQnYw8fjsz/B/kDZB+jcDFuR
-/y7ysVpVJ3/wt5lzuI10S1rLlr4XM09l1K/TgMXPJr4jbjm4SbmozhE4vC9UE0yu
-Wv6ZrXW+5gidhCOuy0BvMDZGXsqPJ0TIsQz1E/tSDz9gyke2nwIDAQABo1MwUTAd
-BgNVHQ4EFgQUIoi+9o/vRGxzAvObLqhB66KPY4kwHwYDVR0jBBgwFoAUIoi+9o/v
-RGxzAvObLqhB66KPY4kwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOC
-AQEACy3VqftGA5bVYMwcvBQFGCMwRqTyL8jGKnvt8RZJ8ePX2thgXIsaC5zPJQAx
-s4z7DFubSBZEpoBwxEIZVI8hsFkPKrUYgsBRTUBVA2Q3E48VTVxyVLEul8BESqaZ
-vIeYwOGwc6q14kLHmq/ZBzbeZPEH2wPORwXouWOonxAWAHvrUUjt0uEY3y0VXRD5
-LnmMjyTlRLqBQyxJWEnJYeeWhIk0ARJMcerkaLcMASUlL6Sua7aI8E2qXOImJofC
-I+mn1PzJcSXvJE/Xi3UVt0GMVgIK7ZsKnAnDR6JulJOq1lkLh3QvERfXQJ4Zz88V
-lzdI/A8lml7s8FEL3jF/rd6lUg==
+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
+5X4cjbWuoFci6FG6
 -----END CERTIFICATE-----
 ```
   </div>
@@ -181,13 +218,12 @@ lzdI/A8lml7s8FEL3jF/rd6lUg==
 
 The Login.gov SAML certificate is valid for just over one year. Every spring, Login.gov adds new SAML endpoints with the current year that use a new signing certificate.
 
-  - `/api/saml/metadata2021` becomes `/api/saml/metadata2022`
-  - `/api/saml/auth2021` becomes `/api/saml/auth2022`
-  - `/api/saml/logout2021` becomes `/api/saml/logout2022`
+  - `/api/saml/auth{{ page.saml_last_year }}` becomes `/api/saml/auth{{ page.saml_year }}`
+  - `/api/saml/logout{{ page.saml_last_year }}` becomes `/api/saml/logout{{ page.saml_year }}`
 
 The certificates are issued to create an overlap period of about a month, during which all partners using SAML should migrate at their convenience to the new endpoint URLs for the current year.
 
-The 2021 certificates for idp.int.identitysandbox.gov and secure.login.gov each expire on April 1, 2022. So the transition from 2021 to 2022 endpoints should take place in February or March 2022.
+The {{ page.saml_last_year }} certificates for idp.int.identitysandbox.gov and secure.login.gov each expire on April 1, {{ page.saml_year }}. So the transition from {{ page.saml_last_year }} to {{ page.saml_year }} endpoints should take place in February or March {{ page.saml_year }}.
 
 ## Auth
 
@@ -196,13 +232,13 @@ The 2021 certificates for idp.int.identitysandbox.gov and secure.login.gov each 
 To authenticate a user with Login.gov, direct them to our authentication URL with a SAML authentication request as a GET param.
 
 ```bash
-https://idp.int.identitysandbox.gov/api/saml/auth2021?SAMLRequest=${SAML_REQUEST}
+https://idp.int.identitysandbox.gov/api/saml/auth{{ page.saml_year }}?SAMLRequest=${SAML_REQUEST}
 ```
 
-The `SAMLRequest` parameter is a base64-encoded, deflate-compressed XML payload of a `<samlp:AuthnRequest>`:
+The `SAMLRequest` parameter is a url-encoded, base64-encoded, deflate-compressed XML payload of a `<samlp:AuthnRequest>`:
 
 ```
-SAML_REQUEST = base64(deflate(payload))
+SAML_REQUEST = urlEncode(base64(deflate(payload)))
 ```
 
 <div class="usa-accordion--bordered">
@@ -257,31 +293,31 @@ An example authentication request, with indentation added for readability.
 
 ### Specifying attributes and assurance levels
 
-The `<saml:AuthnContextClassRef>` tags (nested under `//samlp:AuthnRequest/samlp:RequestedAuthnContext/`) specify the IAL (Identity Assurance Level), AAL (Authentication Assurance Level) and attributes requested.
+The `<saml:AuthnContextClassRef>` tags (nested under `//samlp:AuthnRequest/samlp:RequestedAuthnContext/`) specify the type of identity verification[^1], AAL (Authentication Assurance Level) and attributes requested.
 
-#### Identity Assurance Level (IAL)
+#### Type of Identity Verification[^1] {#identity-assurance-level-ial}
 
 To specify one of the supported IAL levels, place one of these values inside a `<saml:AuthnContextClassRef>` tag:
   - **`http://idmanagement.gov/ns/assurance/ial/1`**
       Basic identity assurance, does not require identity verification (this is the most common value).
   - **`http://idmanagement.gov/ns/assurance/ial/2`**
-      Requires that the user has gone through identity verification
-  - **`http://idmanagement.gov/ns/assurance/ial/2?strict=true`**
-      Requires that the user has gone through identity verification, including a "liveness" check (this is not available in production, only in int and staging environments)
+      Requires that the user has gone through identity verification[^1]
 
 #### Authentication Assurance Level (AAL)
 
 We default to requiring a user to be authenticated with a second factor:
 
 - **`urn:gov:gsa:ac:classes:sp:PasswordProtectedTransport:duo`**
-    This specifies that a user has been authenticated with a second factor. This value will be returned in the user attributes by default. We do not allow AAL 1, because it implies that a user did not authenticate with a second factor.
+    This specifies that a user has been authenticated with a second factor. This value will be returned in the user attributes by default. We do not allow strict AAL 1, because it implies that a user did not authenticate with a second factor. This setting requires users to reauthenticate with a separate second factor (i.e. not a session secret) once every 30 days at a minimum.
 
-To specify a stricter AAL level, add an additional `<saml:AuthnContextClassRef>` with one of these values:
+To specify more restrictive behavior, add an additional `<saml:AuthnContextClassRef>` with one of these values:
 
+  - **`http://idmanagement.gov/ns/assurance/aal/2`**
+      This is the same as the default behavior except users must reauthenticate with a separate second factor (i.e. not a session secret) once every 12 hours.
   - **`http://idmanagement.gov/ns/assurance/aal/3`**
-      This specifies that a user has been authenticated with a crytographically secure method, such as WebAuthn or using a PIV/CAC.
+      This specifies that a user has been authenticated with a crytographically secure method, such as WebAuthn or using a PIV/CAC. Users must _always_ authenticate with a second factor.
   - **`http://idmanagement.gov/ns/assurance/aal/3?hspd12=true`**
-      This specifies that a user has been authenticated with an HSPD12 credential (requires PIV/CAC)
+      This specifies that a user has been authenticated with an HSPD12 credential (requires PIV/CAC). Users must _always_ authenticate with a second factor.
 
 #### Attributes
 
@@ -289,7 +325,7 @@ To request specific attributes, list them (comma-separated) as the query paramet
 
 #### Example specifying IAL, AAL, and attributes
 
-An IAL2 request at AAL3 for email, phone, first name, last name, and SSN might look like:
+A proofed identity request at AAL3 for email, phone, first name, last name, and SSN might look like:
 
 ```xml
 <samlp:AuthnRequest ...>
@@ -312,7 +348,7 @@ The authentication request can specify LOA levels 1 and 3 with one of these valu
   - **`http://idmanagement.gov/ns/assurance/loa/1`**
     Equivalent to IAL1
   - **`http://idmanagement.gov/ns/assurance/loa/3`**
-    Equivalent to IAL2
+    Equivalent to identity proofed
 
 ### RelayState
 
@@ -320,7 +356,7 @@ If you need to pass any information about the request back to your application a
 
 
 ```bash
-https://idp.int.identitysandbox.gov/api/saml/auth2021?SAMLRequest=${SAML_REQUEST}&RelayState=${RELAY_STATE}
+https://idp.int.identitysandbox.gov/api/saml/auth{{ page.saml_year }}?SAMLRequest=${SAML_REQUEST}&RelayState=${RELAY_STATE}
 ```
 
 ## Auth response
@@ -395,7 +431,7 @@ Login.gov does not support Single Logout (SLO). The logout action will terminate
 To log a user out, direct them to the logout URL with a `SAMLRequest`:
 
 ```bash
-https://idp.int.identitysandbox.gov/api/saml/logout2021?SAMLRequest=${SAML_REQUEST}
+https://idp.int.identitysandbox.gov/api/saml/logout{{ page.saml_year }}?SAMLRequest=${SAML_REQUEST}
 ```
 
 The `SAMLRequest` parameter is a base64-encoded, deflate-compressed XML payload of a `<samlp:LogoutRequest>`.
@@ -455,7 +491,7 @@ POST ${ASSERTION_CONSUMER_SERVICE_LOGOUT_URL}
 SAMLResponse=${SAML_RESPONSE}
 ```
 
-The SAMLResponse is a base64-encoded XML payload that contains encrypted data.
+Note: the SAMLResponse does not contain a signature since it's simply acknowledging the logout request.
 
 <div class="usa-accordion--bordered">
 <button class="usa-accordion__button" aria-controls="logout-response-example">
@@ -472,26 +508,6 @@ An example decoded logout response, with indentation added for readability.
                 InResponseTo="_7b95749b-362f-4048-900b-b8e5b839c72b"
                 xmlns="urn:oasis:names:tc:SAML:2.0:protocol">
   <Issuer xmlns="urn:oasis:names:tc:SAML:2.0:assertion">https://idp.int.identitysandbox.gov/api/saml</Issuer>
-  <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
-    <ds:SignedInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
-      <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"></ds:CanonicalizationMethod>
-      <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></ds:SignatureMethod>
-      <ds:Reference URI="#_92312df0-dc35-0134-8e60-02727c87f245">
-        <ds:Transforms>
-          <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
-          <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"></ds:Transform>
-        </ds:Transforms>
-        <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></ds:DigestMethod>
-        <ds:DigestValue>d41d4a431d6f2f889a8451bcd660264a11d43516616ffe2eef2e9cab87095369</ds:DigestValue>
-      </ds:Reference>
-    </ds:SignedInfo>
-    <ds:SignatureValue>uE0iTMAfI2BZGgliuyPXu6Ddup/IwTfW3NqlsLJXjjpjxey0U1CYqzQa0O/MaDkn32XXSCmZkLkYTdhDlfmUZ4taZohWIO7y6wwLRAlRBPZPxOPXSZ8wC37A9LPQvW/EtpnPySv8BzuphsROKC1+PnnxbbSJI6EuifxohAGHe9QTECCAM2nBPJAs5D0zTlFLIHluCwsBTkrY6Kfc1VJBZWClKPkLGVXMy6+tqZqp/9h1ii40e43Y0bB/x+9mJvJ5RfIO+b+gj6Aw2Fm2KNX3kdRTZ6tKaLXqlneCUy4C7syrW/CxoCeWkNwuTnaS9szJ3z9Qg68pDAUhCC5BP2RKXA==</ds:SignatureValue>
-    <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
-      <ds:X509Data>
-        <ds:X509Certificate>MIIDjDCCAnQCCQDnXYBYvsXpXzANBgkqhkiG9w0BAQsFADCBhzEeMBwGA1UEAwwVaWRwLXNhbmRib3gubG9naW4uZ292MQwwCgYDVQQKDANHU0ExDDAKBgNVBAsMAzE4ZjETMBEGA1UEBwwKV2FzaGluZ3RvbjELMAkGA1UECAwCREMxCzAJBgNVBAYTAlVTMRowGAYJKoZIhvcNAQkBFgsxOGZAZ3NhLmdvdjAeFw0xNjA2MDYwMTU5MDVaFw0xNzA2MDYwMTU5MDVaMIGHMR4wHAYDVQQDDBVpZHAtc2FuZGJveC5sb2dpbi5nb3YxDDAKBgNVBAoMA0dTQTEMMAoGA1UECwwDMThmMRMwEQYDVQQHDApXYXNoaW5ndG9uMQswCQYDVQQIDAJEQzELMAkGA1UEBhMCVVMxGjAYBgkqhkiG9w0BCQEWCzE4ZkBnc2EuZ292MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5gG/kitp7qarrggpjq5psf3/6NE7/F5nSpeyJMcQBZmaxOfKaGW87+ynEcuz9XhbnByYX/zHExPGW77g92O5eY8f2Hl1N1vVomaaa359mR3Lljs7PXj0Og+nYnP8TVU31CEaqq0nSx6fuKpVzOeUEE7f0IPGzDHNc3V+UFjcJcn1Hwqf4Rw6KT3yIYwEBWWFrtQgCJTv2WjhUBw5vJ38mG2GidiNleI7azHEI6bcYa8B1WitJbiLxSiO56bFcNpwdzNmWOc6KO3HoZKVpVv9em6EDry7gVMy2/iBoa92nQr0cb/1F5tx7LJXoFOwyRNAaeeXhiC848HsOejHMxmMXwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCWDURUw+ujzp59Cbm+sTCwfZldRp49nM3rS/zfNJUo+HNkr3EEtI3EYRfiedTcvl+kN6lli1xqQIYy8K2T/5iCGVWHSwLPgACXJaH2/w0a+HLP+caI7XZk/NpngyoZfnKJ8AlzSPyYCvCGPkFawnp1Gr110oP+s2JEvONEMrLHVDF8V5d/oU8x8Tf7e/aSDvjkjJJzuDwCzR5ehifPuuS+7idgHDOzQXqcWItiXzDGKDZ+lwFdKfnzxYQOTU1kFFb5eolUjU6yL6VTZSypwKuNQoA63AC0m/h75svOH1rAqHMQLXif1+QVl1B/E9HtcUy8ql1apkiaq2O91EpNr9JY</ds:X509Certificate>
-      </ds:X509Data>
-    </KeyInfo>
-  </ds:Signature>
   <Status xmlns="urn:oasis:names:tc:SAML:2.0:protocol">
     <StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/>
   </Status>
@@ -507,13 +523,13 @@ Login.gov also offers a remote / back channel logout endpoint if your applicatio
 
 For remote logout, you must include a `SessionIndex` element in the SAML request that contains the user's Login.gov UUID. This will allow Login.gov to identify the user that needs to be logged out and terminate their session.
 
-To log a user out using a back channel request, send a request from your application to the remote logout URL with a `SAMLRequest` parameter:
+To log a user out using a back channel request, send a **POST** request from your application to the remote logout URL with a `SAMLRequest` parameter:
 
 ```bash
-https://idp.int.identitysandbox.gov/api/saml/remotelogout2021?SAMLRequest=${SAML_REQUEST}
+https://idp.int.identitysandbox.gov/api/saml/remotelogout{{ page.saml_year }}?SAMLRequest=${SAML_REQUEST}
 ```
 
-The `SAMLRequest` parameter is a base64-encoded, deflate-compressed XML payload of a `<samlp:LogoutRequest>`.
+The `SAMLRequest` parameter is a url-encoded, base64-encoded, deflate-compressed XML payload of a `<samlp:LogoutRequest>`.
 
 All remote logout requests must be signed — we require RSA SHA-256 signatures embedded with logout requests.
 
@@ -566,5 +582,8 @@ In response to a remote logout request Login.gov will render a [logout response]
 
 ## Example application
 
-The Login.gov team has created an example client to speed up your development,
-all open source in the public domain: [identity-saml-sinatra](https://github.com/18F/identity-saml-sinatra)
+The Login.gov team has created an example client to speed up your development, all open source in the public domain: [identity-saml-sinatra](https://github.com/18F/identity-saml-sinatra)
+
+## Footnotes
+
+[^1]: Login.gov continues to work toward achieving certification of compliance with NIST’s IAL2 standard from a third-party assessment organization.
